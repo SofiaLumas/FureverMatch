@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+<div class="container">
+    <div class="mission">
+        <h2>Our mission</h2>
+        <p>
+            At Furever Match, we believe that every pet deserves a loving and forever home. Our mission is to make the adoption process a joyous and well-informed experience for both animals and humans. We aim to create a world where every wag of a tail and every purr is met with a loving heart, where compassion knows no species, and where every match is made in pet-lover's heaven.
+        </p>
+    </div>
+    <div class="image">
+        <!-- Use url_for to point to the correct location of your image in the static folder -->
+        <img src="{{ url_for('static', filename='assets/istockphoto-837572972-612x612.jpg') }}" alt="Dog Image">
+    </div>
+
+    <!-- ... [existing search form code] ... -->
+
+    <section class="daily-feed">
+        <h2>Daily News Feed</h2>
+        {% if latest_animals %}
+            {% for date, animals_on_date in latest_animals %}
+                <div class="date-group">
+                    <h3>Posted on: {{ date }}</h3>
+                    <div class="animal-list">
+                        {% for animal in animals_on_date %}
+                            <div class="animal">
+                                <h4>{{ animal['type_name'] }} - {{ animal['breed_name'] }}</h4>
+                                {% if animal['pic'] %}
+                                    <img src="data:image/jpeg;base64,{{ animal['pic'] }}" alt="Picture of {{ animal['type_name'] }}">
+                                {% else %}
+                                    <p>No image available.</p>
+                                {% endif %}
+                                <p>{{ animal['description'] }}</p>
+                                <a href="{{ url_for('main_bp.profile', profile_id=animal['_id']) }}">View Profile</a>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No animals found.</p>
+        {% endif %}
+    </section>
+</div>
+{% endblock %}

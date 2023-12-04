@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/SignUpForm.css') }}">
+<div class="sign-up-form">
+    <h1>Sign Up</h1>
+    <form method="post">
+        <!-- Fields -->
+        <label for="name">Full Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+
+        <label for="phone">Phone Number:</label>
+        <input type="text" id="phone" name="phone" required>
+
+        <label for="address">Address:</label>
+        <input type="text" id="address" name="address" required>
+
+        <input type="submit" value="Sign Up">
+    </form>
+
+    <div>
+        Already have an account? <a href="{{ url_for('main_bp.login') }}">Login</a>
+    </div>
+</div>
+{% endblock %}
